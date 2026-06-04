@@ -15,6 +15,6 @@ const TENNIS_CONFIG = {
   },
 
   model: "claude-haiku-4-5-20251001",
-  maxTokens: 1600,
+  maxTokens: 4000,
   webSearch: true,
 };
