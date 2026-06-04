@@ -98,9 +98,12 @@ Responde ÚNICAMENTE con JSON válido, sin texto antes ni después, sin backtick
 
     const resp = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
+      headers: {
+  'Content-Type': 'application/json',
+  'x-api-key': TENNIS_CONFIG.apiKey,
+  'anthropic-version': '2023-06-01',
+  'anthropic-dangerous-direct-browser-access': 'true',
+},
 
     if (!resp.ok) {
       const err = await resp.json().catch(() => ({}));
