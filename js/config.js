@@ -14,7 +14,7 @@ const TENNIS_CONFIG = {
     else localStorage.removeItem('tennisedge_apikey');
   },
 
-  model: "claude-haiku-4-5-20251001",
+  model: "claude-opus-4-5-20251101",
   maxTokens: 4000,
   webSearch: true,
 };
