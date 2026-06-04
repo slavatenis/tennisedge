@@ -104,7 +104,8 @@ Responde ÚNICAMENTE con JSON válido, sin texto antes ni después, sin backtick
   'anthropic-version': '2023-06-01',
   'anthropic-dangerous-direct-browser-access': 'true',
 },
-
+body: JSON.stringify(body)
+  });
     if (!resp.ok) {
       const err = await resp.json().catch(() => ({}));
       throw new Error(err.error?.message || `HTTP ${resp.status}`);
