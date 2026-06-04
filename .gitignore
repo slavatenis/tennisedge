@@ -1,0 +1,8 @@
+# Si en algún momento mueves la config a un archivo separado con la key real
+js/config.local.js
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db

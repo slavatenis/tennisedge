@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TennisEdge Analyst</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f1117">
+<meta name="description" content="Análisis táctico y valor de apuesta para partidos de tenis ATP/WTA/Challenger">
+</head>
+<body>
+<div id="app">
+
+  <!-- SIDEBAR: Historial -->
+  <aside id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo-mark">TE</span>
+      <span class="logo-text">TennisEdge</span>
+      <button id="btn-new" title="Nuevo análisis">+</button>
+    </div>
+    <div class="sidebar-section-label">Historial</div>
+    <ul id="history-list"></ul>
+    <div class="sidebar-footer">
+      <button id="btn-clear-history" class="ghost-btn">Limpiar historial</button>
+    </div>
+  </aside>
+
+  <!-- MAIN PANEL -->
+  <main id="main">
+
+    <!-- TOP BAR -->
+    <header id="topbar">
+      <button id="btn-sidebar-toggle" aria-label="Menú">&#9776;</button>
+      <span class="topbar-title">Análisis de partido</span>
+      <div class="circuit-badges">
+        <span class="badge atp">ATP</span>
+        <span class="badge wta">WTA</span>
+        <span class="badge chal">Chal.</span>
+        <span class="badge itf">ITF</span>
+      </div>
+    </header>
+
+    <!-- FORM -->
+    <section id="form-section">
+      <div class="form-grid">
+        <div class="field">
+          <label for="p1">Jugador 1</label>
+          <input id="p1" type="text" placeholder="ej: Alcaraz" autocomplete="off" />
+        </div>
+        <div class="vs-divider">VS</div>
+        <div class="field">
+          <label for="p2">Jugador 2</label>
+          <input id="p2" type="text" placeholder="ej: Zverev" autocomplete="off" />
+        </div>
+      </div>
+
+      <div class="form-row-2">
+        <div class="field">
+          <label for="surface">Superficie</label>
+          <select id="surface">
+            <option value="tierra batida">🔴 Tierra batida</option>
+            <option value="pista dura">🔵 Pista dura</option>
+            <option value="hierba">🟢 Hierba</option>
+            <option value="pista dura indoor">⚪ Dura indoor</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="circuit">Circuito</label>
+          <select id="circuit">
+            <option value="ATP">ATP</option>
+            <option value="WTA">WTA</option>
+            <option value="Challenger">Challenger</option>
+            <option value="ITF">ITF</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tournament">Torneo (opcional)</label>
+          <input id="tournament" type="text" placeholder="ej: Roland Garros 2026" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- CUOTAS -->
+      <div class="odds-section">
+        <div class="odds-label">Cuotas actuales <span class="odds-hint">(opcional — para calcular valor real)</span></div>
+        <div class="odds-row">
+          <div class="field">
+            <label for="odd1">Cuota <span id="odd1-label">Jug. 1</span></label>
+            <input id="odd1" type="number" step="0.01" min="1" placeholder="ej: 1.85" />
+          </div>
+          <div class="field">
+            <label for="odd2">Cuota <span id="odd2-label">Jug. 2</span></label>
+            <input id="odd2" type="number" step="0.01" min="1" placeholder="ej: 2.10" />
+          </div>
+          <div class="field">
+            <label for="odd-market">Mercado cuota</label>
+            <select id="odd-market">
+              <option value="ganador partido">Ganador partido</option>
+              <option value="hándicap sets">Hándicap sets</option>
+              <option value="total juegos over">Total juegos Over</option>
+              <option value="total juegos under">Total juegos Under</option>
+              <option value="ganar al menos un set">Ganar al menos 1 set</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button id="btn-analyze" disabled>
+        <span id="btn-text">Analizar partido</span>
+        <span id="btn-icon">→</span>
+      </button>
+      <div id="api-warning" class="api-warning hidden">
+        ⚠️ Introduce tu API key de Anthropic en <strong>js/config.js</strong> para usar la app.
+      </div>
+    </section>
+
+    <!-- RESULT AREA -->
+    <section id="result-section" class="hidden">
+      <div id="result-header">
+        <span id="result-title"></span>
+        <div class="result-actions">
+          <button id="btn-copy" title="Copiar análisis">&#128203; Copiar</button>
+          <button id="btn-new-from-result" title="Nuevo análisis">+ Nuevo</button>
+        </div>
+      </div>
+      <div id="result-body"></div>
+    </section>
+
+    <!-- LOADING -->
+    <section id="loading-section" class="hidden">
+      <div class="loader-wrap">
+        <div class="loader-court">
+          <div class="court-line top"></div>
+          <div class="court-line mid"></div>
+          <div class="court-line bot"></div>
+          <div class="ball"></div>
+        </div>
+        <div id="loader-msg">Buscando datos recientes...</div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/history.js"></script>
+<script src="js/analyzer.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
